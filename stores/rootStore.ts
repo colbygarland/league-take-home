@@ -1,12 +1,13 @@
 import { useContext, createContext } from 'react';
 import { types, Instance } from 'mobx-state-tree';
+import { DataStore } from './dataStore';
 
 export const rootStore = types
   .model({
-    // Add stores here
+    dataStore: DataStore,
   })
   .create({
-    // Add store's initial state here
+    dataStore: {},
   });
 
 const RootStoreContext = createContext<null | Instance<typeof rootStore>>(null);
