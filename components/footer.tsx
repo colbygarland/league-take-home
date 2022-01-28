@@ -2,7 +2,7 @@ import { AUTHOR_WEBSITE } from '../constants';
 import { Container } from './container';
 
 export const Footer = () => (
-  <footer className="bg-primary py-4 shadow">
+  <footer className="bg-primary py-4 shadow mt-10">
     <Container>
       <p className="text-white text-lg">
         Made with 💖 by{' '}

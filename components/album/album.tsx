@@ -1,5 +1,5 @@
-import { IAlbum } from '../../pages';
 import Link from 'next/link';
+import { IAlbum } from '../../stores/dataStore';
 
 interface AlbumProps {
   album: IAlbum;

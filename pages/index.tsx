@@ -1,15 +1,7 @@
 import { get } from '../api';
 import { Album } from '../components/album/album';
-import { Container } from '../components/container';
-import { Footer } from '../components/footer';
-import { Header } from '../components/header';
+import { IAlbum } from '../stores/dataStore';
 import { rootStore, useStore } from '../stores/rootStore';
-
-export interface IAlbum {
-  userId: number;
-  id: number;
-  title: string;
-}
 
 interface HomeProps {
   albums?: IAlbum[];
@@ -27,15 +19,7 @@ export default function Home({ albums }: HomeProps) {
     }
   };
 
-  return (
-    <>
-      <Header />
-      <Container>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">{renderAlbums()}</div>
-      </Container>
-      <Footer />
-    </>
-  );
+  return <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">{renderAlbums()}</div>;
 }
 
 export async function getServerSideProps() {

@@ -7,7 +7,7 @@ describe('Home', () => {
     render(<WithMST child={Home} />);
 
     const heading = screen.getByRole('heading', {
-      name: 'App Name',
+      name: 'My Photos',
     });
 
     expect(heading).toBeInTheDocument();

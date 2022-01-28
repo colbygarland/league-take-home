@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { get } from '../api';
 import { useStore } from '../stores/rootStore';
 import { Search } from './icons/search';
 
 export const SearchForm = () => {
   const { dataStore } = useStore();
-  const [term, setTerm] = useState<string>('');
+  const router = useRouter();
   const [fetching, setFetching] = useState<boolean>(false);
 
   const handleChange = (event: any) => {
-    setTerm(event.target.value);
+    dataStore.setSearchTerm(event.target.value);
   };
 
   const handleSubmit = async (event: any) => {
@@ -27,10 +28,9 @@ export const SearchForm = () => {
     }
 
     // Search through and find the photos that titles match our term
-    const results = dataStore.findPhotosByTitle(term);
-    console.log(results);
+    dataStore.findPhotosByTitle();
     setFetching(false);
-    // TODO: redirect to the search page with the selected photos
+    router.push('/search');
   };
 
   return (
