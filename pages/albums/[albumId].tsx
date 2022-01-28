@@ -1,8 +1,7 @@
-import axios from 'axios';
 import { Thumbnail } from '../../components/album/thumbnail';
-import { Arrow } from '../../components/arrow';
+import { Arrow } from '../../components/icons/arrow';
 import { Container } from '../../components/container';
-import { API_URL } from '../../constants';
+import { get } from '../../api';
 
 export interface IAlbumDetail {
   albumId: number;
@@ -36,11 +35,6 @@ export default function AlbumDetails({ photos }: AlbumDetailsProps) {
 
 export async function getServerSideProps(context: any) {
   const { albumId } = context.query;
-  try {
-    const response = await axios.get(`${API_URL}/albums/${albumId}/photos`);
-    const photos = await response.data;
-    return { props: { photos } };
-  } catch (error) {
-    console.error(error);
-  }
+  const photos = await get(`albums/${albumId}/photos`);
+  return { props: { photos } };
 }

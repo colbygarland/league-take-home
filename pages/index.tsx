@@ -1,9 +1,8 @@
-import axios from 'axios';
+import { get } from '../api';
 import { Album } from '../components/album/album';
 import { Container } from '../components/container';
 import { Footer } from '../components/footer';
 import { Header } from '../components/header';
-import { API_URL } from '../constants';
 import { rootStore, useStore } from '../stores/rootStore';
 
 export interface IAlbum {
@@ -50,14 +49,7 @@ export async function getServerSideProps() {
   if (dataStore.albums.length !== 0) {
     albums = dataStore.albums;
   } else {
-    try {
-      const response = await axios.get(`${API_URL}/users/1/albums`);
-      albums = await response.data;
-      dataStore.setAlbums(albums);
-      console.log(dataStore.albums);
-    } catch (error) {
-      console.error(error);
-    }
+    albums = await get('users/1/albums');
   }
 
   return { props: { albums } };

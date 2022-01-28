@@ -19,9 +19,16 @@ export const DataStore = types
   .model('DataStore')
   .props({
     albums: types.optional(types.array(Album), []),
+    photos: types.optional(types.array(Photo), []),
   })
   .actions((self) => ({
     setAlbums: (albums: any) => {
       self.albums = cast(albums);
+    },
+    setPhotos: (photos: any) => {
+      self.photos = cast(photos);
+    },
+    findPhotosByTitle: (term: string) => {
+      return self.photos.filter((photo) => photo.title.includes(term));
     },
   }));
