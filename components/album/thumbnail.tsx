@@ -8,7 +8,7 @@ export const Thumbnail = ({ thumbnail }: ThumbnailProps) => {
   return (
     <div>
       <a className="block" href={thumbnail.url} target="_blank" referrerPolicy="origin">
-        <img src={thumbnail.thumbnailUrl} alt={thumbnail.title} />
+        <img src={thumbnail.thumbnailUrl} alt={thumbnail.title} className="shadow rounded-md" />
         <h5>
           <small>{thumbnail.title}</small>
         </h5>

@@ -40,17 +40,25 @@ export default function Home({ albums }: HomeProps) {
 }
 
 export async function getServerSideProps() {
+  // Have a sensible default in case of an error
+  let albums = {};
+
   // We want to cache this data, since it looks like it doesn't need to change often
   // Note: if this was a real application, I would add an expire time of probably an hour or a day,
-  //       but for this application I think having no cache is fine.
+  //       but for this application I think having no expire is fine.
   const { dataStore } = rootStore;
-  if (dataStore.albums.length !== 0) return { props: {} };
-  try {
-    const response = await axios.get(`${API_URL}/users/1/albums`);
-    const albums = await response.data;
-    dataStore.setAlbums(albums);
-    return { props: { albums } };
-  } catch (error) {
-    console.error(error);
+  if (dataStore.albums.length !== 0) {
+    albums = dataStore.albums;
+  } else {
+    try {
+      const response = await axios.get(`${API_URL}/users/1/albums`);
+      albums = await response.data;
+      dataStore.setAlbums(albums);
+      console.log(dataStore.albums);
+    } catch (error) {
+      console.error(error);
+    }
   }
+
+  return { props: { albums } };
 }

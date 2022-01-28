@@ -1,4 +1,4 @@
-import { types } from 'mobx-state-tree';
+import { cast, types } from 'mobx-state-tree';
 
 const Photo = types.model({
   id: types.optional(types.identifierNumber, 0),
@@ -22,6 +22,6 @@ export const DataStore = types
   })
   .actions((self) => ({
     setAlbums: (albums: any) => {
-      self.albums = albums;
+      self.albums = cast(albums);
     },
   }));
